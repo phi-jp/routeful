@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id='info'>top</div>
+
+    <ul>
+      <li><a href='#hoge'>hoge</a></li>
+      <li><a href='#foo'>foo</a></li>
+      <li><a href='#bar'>bar</a></li>
+      <li><a href='#items/2'>item 2</a></li>
+      <li><a href='#items/1988'>item 1988</a></li>
+      <li><a href='http://phiary.me'>phiary</a></li>
+    </ul>
+
+    <script type="text/javascript" src="routeful.js" charset="utf-8"></script>
+    <script>
+    var info = document.querySelector('#info');
+    var routeful = Routeful();
+
+    // for file protocol
+    routeful.base('#');
+    routeful.origin(location.pathname);
+
+    routeful.on('/hoge', function() {
+      info.innerHTML = 'hoge';
+    });
+    routeful.on('/items/:id', function(req) {
+      info.innerHTML = 'item ' + req.params.id;
+    });
+    routeful.on('*', function() {
+      info.innerHTML = 'dont matched';
+    });
+
+    routeful.start(true);
+
+    // p.on('/foo/:bar', function(req, res, next) {
+    //   console.log(req);
+    //   req.count = 0;
+    //   next();
+    // }, function(req, res) {
+    //   console.log(req.count);
+    // });
+    // p.on('/hoge/:bar', function(req, res) {
+    //   debugger;
+    //   alert('hoge');
+    // });
+    // p.on('/*', function() {
+    //   alert('*');
+    // });
+
+    // p.emit('/foo/100');
+    // // p.emit('/fdfad');
+
+    // var router = Peater.Router();
+    // router.get('/foo', function() {
+
+    // }, function() {
+
+    // });
+
+    // // router.get('/foo');
+    // console.dir(router);
+    </script>
+  </body>
+</html>
