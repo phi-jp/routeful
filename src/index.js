@@ -11,6 +11,7 @@ var Routeful = function() {
     return new Routeful();
   }
 
+  this._current = location.href;
   this._base = '/';
   this._origin = '';
   this._stack = [];
@@ -87,6 +88,9 @@ var onclick = function(e) {
     return ;
   }
 
+  // check some url
+  if (elm.href === location.href) return ;
+
   var link = elm.getAttribute('href');
   this.go(link);
 
@@ -94,7 +98,11 @@ var onclick = function(e) {
 };
 
 var onpopstate = function(e) {
-  this.emit(location.pathname + location.hash);
+  // check some url
+  if (this._current !== location.href) {
+    this.emit(location.pathname + location.hash);
+    this._current = location.href;
+  }
 };
 
 module.exports = Routeful;
