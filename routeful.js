@@ -653,7 +653,7 @@ var onclick = function(e) {
   if (elm.nodeName !== 'A') return;
 
   // check cross origin
-  if (link.indexOf(location.href.match(RE_ORIGIN)) === -1) {
+  if (elm.hostname !== location.hostname) {
     return ;
   }
 
