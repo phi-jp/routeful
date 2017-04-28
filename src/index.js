@@ -89,10 +89,10 @@ var onclick = function(e) {
   }
 
   // check some url
-  if (elm.href === location.href) return ;
-
-  var link = elm.getAttribute('href');
-  this.go(link);
+  if (elm.href !== location.href) {
+    var link = elm.getAttribute('href');
+    this.go(link);
+  }
 
   e.preventDefault();
 };
