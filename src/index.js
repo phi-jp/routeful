@@ -3,7 +3,6 @@
  */
 
 var TOUCH_EVENT = ('undefined' !== typeof document) && document.ontouchstart ? 'touchstart' : 'click';
-var RE_ORIGIN = /^.+?\/\/+[^\/]+/;
 var Layer = require('./layer');
 var slice = Array.prototype.slice;
 
