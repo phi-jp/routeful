@@ -59,6 +59,11 @@ Routeful.prototype.go = function(path) {
 
 Routeful.prototype.emit = function(path) {
   path = path.replace(this._origin, '').replace(this._base, '/');
+
+  // check some url
+  if (this._current === path) return ;
+  this._current = path;
+
   this._stack.some(function(l) {
     var match = l.match(path);
 
@@ -98,11 +103,7 @@ var onclick = function(e) {
 };
 
 var onpopstate = function(e) {
-  // check some url
-  if (this._current !== location.href) {
-    this.emit(location.pathname + location.hash);
-    this._current = location.href;
-  }
+  this.emit(location.pathname + location.hash);
 };
 
 module.exports = Routeful;
