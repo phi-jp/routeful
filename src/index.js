@@ -74,16 +74,20 @@ var onclick = function(e) {
   if (e.metaKey || e.ctrlKey || e.shiftKey) return;
 
   var elm = e.target;
-  var link = elm.getAttribute('href');
+  while(elm) {
+    if (elm.nodeName === 'A') break;
+    elm = elm.parentNode;
+  }
 
   // check anchor
-  if (elm.nodeName !== 'A') return;
+  if (!elm || elm.nodeName !== 'A') return;
 
   // check cross origin
   if (elm.hostname !== location.hostname) {
     return ;
   }
 
+  var link = elm.getAttribute('href');
   this.go(link);
 
   e.preventDefault();
