@@ -51,8 +51,13 @@ Routeful.prototype.stop = function() {
   // TODO:
 };
 
-Routeful.prototype.go = function(path) {
-  history.pushState(this.state, null, path);
+Routeful.prototype.go = function(path, replace) {
+  if (replace === true) {
+    history.replaceState(this.state, null, path);
+  }
+  else {
+    history.pushState(this.state, null, path);
+  }
   this.emit(path);
 
   return this;
