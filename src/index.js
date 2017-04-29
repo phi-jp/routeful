@@ -59,7 +59,7 @@ Routeful.prototype.go = function(path) {
 };
 
 Routeful.prototype.emit = function(path) {
-  path = path.replace(this._origin, '').replace(this._base, '/');
+  path = path.replace(this._root, '').replace(this._base, '/');
 
   // check some url
   if (this._current === path) return ;
