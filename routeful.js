@@ -584,8 +584,8 @@ var Routeful = function() {
   }
 
   this._current = location.href;
-  this._base = '/';
-  this._origin = location.pathname;
+  this._base = '';
+  this._root = '';
   this._stack = [];
 };
 
@@ -594,8 +594,8 @@ Routeful.prototype.base = function(base) {
   return this;
 };
 
-Routeful.prototype.origin = function(origin) {
-  this._origin = origin;
+Routeful.prototype.root = function(root) {
+  this._root = root;
 };
 
 Routeful.prototype.on = function(path) {

@@ -21,7 +21,7 @@
 
     // for file protocol
     routeful.base('#');
-    routeful.origin(location.pathname);
+    routeful.root(location.pathname);
 
     routeful.on('/hoge', function() {
       info.innerHTML = 'hoge';
