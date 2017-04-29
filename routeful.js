@@ -584,7 +584,7 @@ var Routeful = function() {
   }
 
   this._current = location.href;
-  this._base = '';
+  this._base = '/';
   this._root = '';
   this._stack = [];
 };
