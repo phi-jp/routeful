@@ -608,7 +608,8 @@ Routeful.prototype.start = function(exec) {
   this.onpopstate = onpopstate.bind(this);
   this.onclick = onclick.bind(this);
 
-  window.addEventListener('popstate', this.onpopstate, false);
+  window.addEventListener('popstate', this.onpopstate);
+  window.addEventListener('hashchange', this.onpopstate);
   document.addEventListener(TOUCH_EVENT, this.onclick);
 
   if (exec) {
@@ -658,18 +659,27 @@ var onclick = function(e) {
   }
 
   // check anchor
-  if (!elm || elm.nodeName !== 'A') return;
+  if (!elm || elm.nodeName !== 'A') {
+    return;
+  }
+
+  // check href attribute
+  if (!elm.hasAttribute('href')) {
+    return ;
+  }
 
   // check cross origin
   if (elm.hostname !== location.hostname) {
     return ;
   }
 
-  // check some url
   if (elm.href !== location.href) {
-    var link = elm.getAttribute('href');
-    this.go(link);
+    return ;
   }
+
+  // check some url
+  var link = elm.getAttribute('href');
+  this.go(link);
 
   e.preventDefault();
 };
