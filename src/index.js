@@ -13,7 +13,7 @@ var Routeful = function() {
 
   this._current = location.href;
   this._base = '/';
-  this._origin = '';
+  this._origin = location.pathname;
   this._stack = [];
 };
 
