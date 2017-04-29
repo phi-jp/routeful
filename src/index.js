@@ -92,7 +92,7 @@ var onclick = function(e) {
   }
 
   // check href attribute
-  if (!elm.hasAttribute('href')) {
+  if (!elm.getAttribute('href')) {
     return ;
   }
 
@@ -102,12 +102,10 @@ var onclick = function(e) {
   }
 
   if (elm.href !== location.href) {
-    return ;
+    // check some url
+    var link = elm.getAttribute('href');
+    this.go(link);
   }
-
-  // check some url
-  var link = elm.getAttribute('href');
-  this.go(link);
 
   e.preventDefault();
 };
