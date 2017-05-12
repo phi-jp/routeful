@@ -630,7 +630,8 @@ Routeful.prototype.go = function(path, replace) {
   else {
     history.pushState(this.state, null, path);
   }
-  this.emit(path);
+  // query は無視する
+  this.emit(path.split('?')[0]);
 
   return this;
 };
