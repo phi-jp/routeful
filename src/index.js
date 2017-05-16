@@ -97,17 +97,12 @@ var onclick = function(e) {
     return;
   }
 
-  // check href attribute
-  if (!elm.getAttribute('href')) {
-    return ;
-  }
-
   // check cross origin
   if (elm.hostname !== location.hostname) {
     return ;
   }
 
-  if (elm.href !== location.href) {
+  if (elm.getAttribute('href') && elm.href !== location.href) {
     // check some url
     var link = elm.getAttribute('href');
     this.go(link);
