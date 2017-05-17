@@ -9,6 +9,7 @@ var Layer = function(filter, callbacks) {
   this.filter = filter;
   this.keys = [];
   this.regexp = pathToRegexp(this.filter, this.keys);
+  this.regexp = pathToRegexp(this.path, this.keys);
   this.callbacks = callbacks;
 };
 
@@ -33,6 +34,7 @@ Layer.prototype.run = function() {
   var callbacks = this.callbacks;
   var req = {
     params: this.params,
+    layer: this,
   };
 
   var next = function() {
