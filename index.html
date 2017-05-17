@@ -25,6 +25,11 @@
 
     routeful.on('/hoge', function() {
       info.innerHTML = 'hoge';
+      console.log(1);
+    }, function() {
+      console.log(2);
+    }, function() {
+      console.log(3);
     });
     routeful.on('/items/:id', function(req) {
       info.innerHTML = 'item ' + req.params.id;

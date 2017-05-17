@@ -42,7 +42,13 @@ Layer.prototype.run = function() {
 
     var callback = callbacks[index++];
 
-    callback(req, {}, next);
+    if (callback.length >= 3) {
+      callback(req, {}, next);
+    }
+    else {
+      callback(req, {});
+      next();
+    }
   };
 
   next();
