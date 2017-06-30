@@ -683,7 +683,8 @@ var onclick = function(e) {
 
   if (elm.getAttribute('href') && elm.href !== location.href) {
     // check some url
-    var link = elm.getAttribute('href');
+    // var link = elm.getAttribute('href');
+    var link = elm.pathname + elm.search + location.hash;
     this.go(link);
   }
 

@@ -1,14 +1,13 @@
 
 var pathToRegexp = require('path-to-regexp');
 
-var Layer = function(filter, callbacks) {
+var Layer = function(path, callbacks) {
   if (!(this instanceof Layer)) {
-    return new Layer(filter, callbacks);
+    return new Layer(path, callbacks);
   }
 
-  this.filter = filter;
+  this.path = path;
   this.keys = [];
-  this.regexp = pathToRegexp(this.filter, this.keys);
   this.regexp = pathToRegexp(this.path, this.keys);
   this.callbacks = callbacks;
 };
