@@ -6,12 +6,15 @@
     <div id='info'>top</div>
 
     <ul>
-      <li><a href='#hoge'>hoge</a></li>
-      <li><a href='#foo'>foo</a></li>
-      <li><a href='#bar'>bar</a></li>
-      <li><a href='#items/2'>item 2</a></li>
-      <li><a href='#items/1988'>item 1988</a></li>
-      <li><a href='http://phiary.me'>phiary</a></li>
+      <li><a href='/'>root</a></li>
+      <li><a href='/hoge'>hoge</a></li>
+      <li><a href='/hoge?q=a'>hoge with query</a></li>
+      <li><a href='/foo'>foo</a></li>
+      <li><a href='/bar'>bar</a></li>
+      <li><a href='/items/2'>item 2</a></li>
+      <li><a href='/items/1988#hoge'>item 1988</a></li>
+      <li><a href='http://localhost:4000/items/1988'>full path(server 時)</a></li>
+      <li><a href='https://www.google.co.jp/'>外部リンク</a></li>
     </ul>
 
     <script type="text/javascript" src="routeful.js" charset="utf-8"></script>
@@ -20,10 +23,12 @@
     var routeful = Routeful();
 
     // for file protocol
-    routeful.base('#');
-    routeful.root(location.pathname);
+    if (location.protocol === 'file:') {
+      routeful.base('#');
+      routeful.root(location.pathname);
+    }
 
-    routeful.on('/hoge', function() {
+    routeful.on('/hoge*', function() {
       info.innerHTML = 'hoge';
       console.log(1);
     }, function() {

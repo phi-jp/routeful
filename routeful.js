@@ -631,6 +631,8 @@ Routeful.prototype.stop = function() {
 };
 
 Routeful.prototype.go = function(path, replace) {
+  path = path.replace('/', this._base);
+
   if (replace === true) {
     history.replaceState(this.state, null, path);
   }
@@ -638,7 +640,7 @@ Routeful.prototype.go = function(path, replace) {
     history.pushState(this.state, null, path);
   }
   // query は無視する
-  this.emit(path.split('?')[0]);
+  this.emit(path);
 
   return this;
 };
@@ -649,6 +651,9 @@ Routeful.prototype.emit = function(path) {
   // check some url
   if (this._current === path) return ;
   this._current = path;
+
+  // マッチングの際は query を外す
+  path = path.split('?')[0];
 
   this._stack.some(function(l) {
     var match = l.match(path);
@@ -682,9 +687,8 @@ var onclick = function(e) {
   }
 
   if (elm.getAttribute('href') && elm.href !== location.href) {
-    // check some url
     // var link = elm.getAttribute('href');
-    var link = elm.pathname + elm.search + location.hash;
+    var link = elm.pathname + elm.search + elm.hash;
     this.go(link);
   }
 

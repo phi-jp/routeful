@@ -12,3 +12,23 @@ route + full
   + routing のコアとなる機能
 - [route/index.js at master · riot/route](https://github.com/riot/route/blob/master/lib/index.js)
   + riot の router, page.js をかなり参考にしてるっぽい
+
+## build
+
+```
+$ webpack
+```
+
+## watch & build
+
+```
+$ webpack --watch
+```
+
+
+## server
+
+```
+$ npm install -g serve
+$ serve -p 4000
+```
