@@ -42,7 +42,7 @@ Routeful.prototype.start = function(exec) {
   document.addEventListener(TOUCH_EVENT, this.onclick);
 
   if (exec) {
-    this.emit(location.pathname + location.hash);
+    this.emit(location.pathname + location.search + location.hash);
   }
 
   return this;

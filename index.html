@@ -28,7 +28,9 @@
       routeful.root(location.pathname);
     }
 
-    routeful.on('/hoge*', function(req) {
+    routeful.on('/hoge', function(req) {
+      console.log(req);
+      debugger;
       info.innerHTML = 'hoge';
       req.count = 0;
       console.log(req.count++);
@@ -40,7 +42,8 @@
     routeful.on('/items/:id', function(req) {
       info.innerHTML = 'item ' + req.params.id;
     });
-    routeful.on('*', function() {
+    routeful.on('*', function(req) {
+      console.log(req);
       info.innerHTML = 'dont matched';
     });
 
