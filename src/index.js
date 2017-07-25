@@ -2,6 +2,7 @@
  *
  */
 
+var URL = require('url');
 var TOUCH_EVENT = ('undefined' !== typeof document) && document.ontouchstart ? 'touchstart' : 'click';
 var Layer = require('./layer');
 var slice = Array.prototype.slice;
@@ -73,14 +74,19 @@ Routeful.prototype.emit = function(path) {
   if (this._current === path) return ;
   this._current = path;
 
-  // マッチングの際は query を外す
-  path = path.split('?')[0];
+  var url = URL.parse(path, true);
 
   this._stack.some(function(l) {
-    var match = l.match(path);
+    var params = l.match(url);
 
-    if (l.match(path)) {
-      l.run();
+    if (params) {
+      l.run({
+        url: url.path,
+        query: url.query,
+        Url: url,
+        params: params,
+        layer: l,
+      });
       return true;
     }
   });

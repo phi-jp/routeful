@@ -12,29 +12,25 @@ var Layer = function(path, callbacks) {
   this.callbacks = callbacks;
 };
 
-Layer.prototype.match = function(path) {
-  var match = this.regexp.exec(path);
+Layer.prototype.match = function(url) {
+  var match = this.regexp.exec(url.pathname);
 
   if (!match) return false;
 
-  this.params = {};
+  var params = {};
 
   for (var i=1; i<match.length; ++i) {
     var val = match[i];
     var key = this.keys[i-1].name;
-    this.params[key] = val;
+    params[key] = val;
   }
 
-  return true;
+  return params;
 };
 
-Layer.prototype.run = function() {
+Layer.prototype.run = function(req) {
   var index = 0;
   var callbacks = this.callbacks;
-  var req = {
-    params: this.params,
-    layer: this,
-  };
 
   var next = function() {
     if (index >= callbacks.length) {

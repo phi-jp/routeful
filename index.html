@@ -28,13 +28,14 @@
       routeful.root(location.pathname);
     }
 
-    routeful.on('/hoge*', function() {
+    routeful.on('/hoge*', function(req) {
       info.innerHTML = 'hoge';
-      console.log(1);
-    }, function() {
-      console.log(2);
-    }, function() {
-      console.log(3);
+      req.count = 0;
+      console.log(req.count++);
+    }, function(req) {
+      console.log(req.count++);
+    }, function(req) {
+      console.log(req.count++);
     });
     routeful.on('/items/:id', function(req) {
       info.innerHTML = 'item ' + req.params.id;
