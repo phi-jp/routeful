@@ -2220,7 +2220,7 @@ Routeful.prototype.emit = function(path) {
 
 var onclick = function(e) {
   // 
-  if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+  if (e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
 
   var elm = e.target;
   while(elm) {

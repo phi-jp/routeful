@@ -15,6 +15,7 @@
       <li><a href='/items/1988#hoge'>item 1988</a></li>
       <li><a href='http://localhost:4000/items/1988'>full path(server 時)</a></li>
       <li><a href='https://www.google.co.jp/'>外部リンク</a></li>
+      <li><a href="/hogehoge"><div id="defaultPrevented">defaultPrevented(リンクが変わらなければOK)</div></a></li>
     </ul>
 
     <script type="text/javascript" src="routeful.js" charset="utf-8"></script>
@@ -48,6 +49,10 @@
     });
 
     routeful.start(true);
+
+    document.getElementById('defaultPrevented').onclick = function(e) {
+      e.preventDefault();
+    };
 
     // p.on('/foo/:bar', function(req, res, next) {
     //   console.log(req);
