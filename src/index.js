@@ -16,15 +16,10 @@ var Routeful = function() {
   this._base = '/';
   this._root = '';
   this._stack = [];
-  var state = (history.length === 1 || location.pathname === '/') ? history.length - 1 : history.state;
-  this.isLegacy = !this.testStateFormat(state);
   this._history = new Array(history.length);
-  this.state = 0;
-  if (!this.isLegacy) {
-    this.state = state;
-    this._history[state] = location.href.replace(location.origin, '');
-    history.replaceState(state, null, this._history[state]);
-  }
+  this.state = this.testStateFormat(history.state) ? history.state : history.length - 1;
+  this._history[this.state] = location.href.replace(location.origin, '');
+  history.replaceState(this.state, null, this._history[this.state]);
 };
 
 Routeful.prototype.base = function(base) {
@@ -131,7 +126,7 @@ Routeful.prototype.popState = function(state) {
   return this;
 };
 
-Routeful.prototype.getCurrent = function(state) {
+Routeful.prototype.getCurrent = function() {
   return this._current;
 };
 
