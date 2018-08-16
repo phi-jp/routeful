@@ -163,7 +163,7 @@ Routeful.prototype.canForward = function() {
   if (this.isLegacy) {
     return false;
   }
-  return this.state < history.length - 1;
+  return this.state < this._history.length - 1;
 };
 
 var onclick = function(e) {
