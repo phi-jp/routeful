@@ -207,7 +207,7 @@ var onpopstate = function(e) {
       this.isForward = false;
     }
   }
-  this.emit(location.pathname + location.hash);
+  this.emit(location.pathname + location.search + location.hash);
 };
 
 module.exports = Routeful;
