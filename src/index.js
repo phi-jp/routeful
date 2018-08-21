@@ -119,8 +119,8 @@ Routeful.prototype.popState = function(state) {
   if (this.isLegacy) {
     return this;
   }
-  this.isBack = this.state < state;
-  this.isForward = this.state > state;
+  this.isBack = this.state > state;
+  this.isForward = this.state < state;
   this.state = state;
   this._history[this.state] = location.href.replace(location.origin, '');
   return this;
