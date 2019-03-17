@@ -233,6 +233,13 @@ var onclick = function(e) {
 };
 
 var onpopstate = function(e) {
+  // バックをキャンセル
+  if (e.preventBack) {
+    // URL を元に戻す
+    history.forward();
+    return ;
+  }
+  
   if (e.type === 'popstate') {
     this.popState(e.state);
   }
