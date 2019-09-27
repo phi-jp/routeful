@@ -2177,9 +2177,15 @@ Routeful.prototype.start = function(exec) {
   document.addEventListener(TOUCH_EVENT, this.onclick);
 
   if (exec) {
-    this.emit(location.pathname + location.search + location.hash);
+    this.exec();
   }
 
+  return this;
+};
+
+// 今のページで emit
+Routeful.prototype.exec = function() {
+  this.emit(location.pathname + location.search + location.hash);
   return this;
 };
 
@@ -2212,7 +2218,7 @@ Routeful.prototype.emit = function(path) {
   path = path.replace(this._root, '').replace(this._base, '/');
 
   // check some url
-  if (this._current === path) return ;
+  if (this._current === path) return this;
   this._current = path;
 
   var url = URL.parse(path, true);
@@ -2376,7 +2382,7 @@ var onpopstate = function(e) {
       this.isForward = false;
     }
   }
-  this.emit(location.pathname + location.search + location.hash);
+  this.exec();
 };
 
 module.exports = Routeful;
