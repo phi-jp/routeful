@@ -239,8 +239,13 @@ var onclick = function(e) {
 };
 
 var onpopstate = function(e) {
+  if (this._skip) {
+    this._skip = false;
+    return ;
+  }
   // バックをキャンセル
   if (e.preventBack) {
+    this._skip = true;
     // URL を元に戻す
     history.forward();
     return ;
